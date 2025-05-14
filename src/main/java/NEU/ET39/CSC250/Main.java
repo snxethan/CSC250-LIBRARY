@@ -3,15 +3,35 @@ package NEU.ET39.CSC250;
 import NEU.ET39.CSC250.Algorithms.CodeWars;
 import NEU.ET39.CSC250.Algorithms.Isomorphs;
 import NEU.ET39.CSC250.Algorithms.Recursive;
+import NEU.ET39.CSC250.DataStructures.BinarySearchTree;
 
 import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        sorting();
+//        sorting();
 //        codeWars();
 //        recursive();
 //        isomorphs();
+        dataStructures();
+    }
+
+    public static void dataStructures() {
+        // Binary Search Tree
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        bst.add(5);
+        bst.add(3);
+        bst.add(7);
+        bst.add(2);
+        bst.add(4);
+        bst.add(6);
+        bst.add(8);
+        System.out.println("Binary Search Tree:");
+        System.out.println("In-order Traversal: " + bst.inOrderTraversal());
+        System.out.println("Pre-order Traversal: " + bst.preOrderTraversal());
+        System.out.println("Post-order Traversal: " + bst.postOrderTraversal());
+        System.out.println("Level-order Traversal: " + bst.levelOrderTraversal());
+        System.out.println("Contains 4: " + bst.contains(4));
     }
 
     public static void sorting(){
