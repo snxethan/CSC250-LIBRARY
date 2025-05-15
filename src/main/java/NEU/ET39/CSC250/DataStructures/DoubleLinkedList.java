@@ -1,5 +1,7 @@
 package NEU.ET39.CSC250.DataStructures;
 
+import NEU.ET39.CSC250.DataStructures.Nodes.Node_DLL;
+
 public class DoubleLinkedList <T extends Comparable<T>> {
     private Node_DLL<T> head;
     private Node_DLL<T> tail;

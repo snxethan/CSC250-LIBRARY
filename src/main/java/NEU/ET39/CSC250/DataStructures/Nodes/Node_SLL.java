@@ -1,4 +1,4 @@
-package NEU.ET39.CSC250.DataStructures;
+package NEU.ET39.CSC250.DataStructures.Nodes;
 
 public class Node_SLL<T extends Comparable<T>> {
     private T data;

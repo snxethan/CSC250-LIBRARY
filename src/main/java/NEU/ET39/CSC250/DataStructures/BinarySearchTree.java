@@ -1,205 +1,144 @@
 package NEU.ET39.CSC250.DataStructures;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import NEU.ET39.CSC250.DataStructures.Nodes.Node_BST;
 
 public class BinarySearchTree<T extends Comparable<T>> {
-    Node_DLL<T> root;
+    Node_BST<T> root;
     int count;
 
+    /**
+     * The Binary Search Tree data structure
+     * O(1)
+     */
     public BinarySearchTree() {
         this.root = null;
         this.count = 0;
     }
 
-//    public Node_DLL<T> getRoot() {
-//        return root;
-//    }
+
+    /**
+     * Add to the tree with a specific value
+     * @param value the value you want to represent as a node.
+     * O(log n) average, O(n) worst
+     */
+    public void Add(T value){
+        Node_BST<T> newNode = new Node_BST<>(value);
+        if (root == null) {
+            root = newNode;
+        } else {
+            root.add(newNode);
+        }
+        count++;
+    }
+
+
+    /**
+     * Clear the nodes and reset the count
+     */
+    public void clear(){
+        root = null;
+        count = 0;
+    }
+
+    /**
+     * remove a specific value from the binary search tree.
+     * @param value the value you want to remove.
+     */
+    public void remove(T value) {
+        root = removeRecursive(root, value); // O(log n)
+    }
+
+    /**
+     * recursively loop through and remove a specific value/node
+     * if the value exists, shift up nodes in the congruent order of the next possible node
+     * @param current the current node in the recursive loop, starting from the root
+     * @param value the value you want to remove.
+     * @return the current node checked, to be recursed until no children / only 1 child.
+     * O(log n)
+     */
+    private Node_BST<T> removeRecursive(Node_BST<T> current, T value) {
+
+        //best case
+        if (current == null) {
+            return current;
+        }
+
+        if (value.compareTo(current.getData()) < 0) {
+            current.setLeft(removeRecursive(current.getLeft(), value)); // O(log n)
+        } else if (value.compareTo(current.getData()) > 0) {
+            current.setRight(removeRecursive(current.getRight(), value)); // O(log n)
+        } else {
+            // Node with only one child or no child
+            if (current.getLeft() == null) {
+                count--;
+                return current.getRight();
+            } else if (current.getRight() == null) {
+                count--;
+                return current.getLeft();
+            }
+
+            // Node with two children: Get the inorder successor (smallest in the right subtree)
+            T temp = findMin(current.getRight());
+
+            // Copy the inorder successor's content to this node
+            current.setData(temp);
+
+            // Delete the inorder successor
+            current.setRight(removeRecursive(current.getRight(), temp)); // O(log n)
+        }
+        return current;
+    }
+
+    /**
+     * Find the smallest node in a given branch
+     * @param current the node you are at
+     * @return
+     * O(log n)
+     */
+    private T findMin(Node_BST<T> current) {
+        while (current.getLeft() != null) {
+            current = current.getLeft();
+        }
+        return current.getData();
+    }
+
+    public int getCount(){
+        return count;
+    }
+
+
+// Pseudocode for removeRecursive()
+
+// Function: removeRecursive(currentNode, value)
+// Purpose: Recursively removes a node with the given value from the BST
+// Input: currentNode (starting node), value (value to delete)
+// Output: returns the updated subtree
+
+//if currentNode is null:
+//            return null
 //
-//    public void setRoot(Node_DLL<T> root) {
-//        this.root = root;
-//    }
+//            if value < currentNode.data:
+//    currentNode.left = removeRecursive(currentNode.left, value)
+
+//else if value > currentNode.data:
+//    currentNode.right = removeRecursive(currentNode.right, value)
+
+//else:
+//        // Found the node to remove
 //
-//    public int getCount() {
-//        return count;
-//    }
+//        if currentNode.left is null:
+//    decrement count
+//        return currentNode.right
+
+//    else if currentNode.right is null:
+//    decrement count
+//        return currentNode.left
 //
-//    public void setCount(int count) {
-//        if (count < 0) {
-//            throw new IllegalArgumentException("Count cannot be negative");
-//        }
-//        this.count = count;
-//    }
+//            // Node has two children
+//            successorValue = findMin(currentNode.right)
+//    currentNode.data = successorValue
+//    currentNode.right = removeRecursive(currentNode.right, successorValue)
 //
-//    public void add(T value) {
-//        Node_DLL<T> newNode = new Node_DLL<>(value);
-//        if (root == null) {
-//            root = newNode;
-//        } else {
-//            addRecursive(root, newNode);
-//        }
-//        count++;
-//    }
-//
-//    private void addRecursive(Node_DLL<T> current, Node_DLL<T> newNode) {
-//        if (newNode.getData().compareTo(current.getData()) < 0) {
-//            if (current.getPrev() == null) {
-//                current.setPrev(newNode);
-//            } else {
-//                addRecursive(current.getPrev(), newNode);
-//            }
-//        } else {
-//            if (current.getNext() == null) {
-//                current.setNext(newNode);
-//            } else {
-//                addRecursive(current.getNext(), newNode);
-//            }
-//        }
-//    }
-//
-//    public boolean contains(T value) {
-//        return containsRecursive(root, value);
-//    }
-//
-//    private boolean containsRecursive(Node_DLL<T> current, T value) {
-//        if (current == null) {
-//            return false;
-//        }
-//        if (value.compareTo(current.getData()) == 0) {
-//            return true;
-//        } else if (value.compareTo(current.getData()) < 0) {
-//            return containsRecursive(current.getPrev(), value);
-//        } else {
-//            return containsRecursive(current.getNext(), value);
-//        }
-//    }
-//
-//    public void remove(T value) {
-//        root = removeRecursive(root, value);
-//        count--;
-//    }
-//
-//    private Node_DLL<T> removeRecursive(Node_DLL<T> current, T value) {
-//        if (current == null) {
-//            return null;
-//        }
-//        if (value.compareTo(current.getData()) < 0) {
-//            current.setPrev(removeRecursive(current.getPrev(), value));
-//        } else if (value.compareTo(current.getData()) > 0) {
-//            current.setNext(removeRecursive(current.getNext(), value));
-//        } else {
-//            if (current.getPrev() == null) {
-//                return current.getNext();
-//            } else if (current.getNext() == null) {
-//                return current.getPrev();
-//            }
-//            current.setData(minValue(current.getNext()));
-//            current.setNext(removeRecursive(current.getNext(), current.getData()));
-//        }
-//        return current;
-//    }
-//
-//    private T minValue(Node_DLL<T> node) {
-//        T minValue = node.getData();
-//        while (node.getPrev() != null) {
-//            minValue = node.getPrev().getData();
-//            node = node.getPrev();
-//        }
-//        return minValue;
-//    }
-//
-//    public void clear() {
-//        root = null;
-//        count = 0;
-//    }
-//
-//    public String toString() {
-//        return toStringRecursive(root);
-//    }
-//
-//    private String toStringRecursive(Node_DLL<T> current) {
-//        if (current == null) {
-//            return "";
-//        }
-//        StringBuilder sb = new StringBuilder();
-//        sb.append(toStringRecursive(current.getPrev()));
-//        sb.append(current.getData()).append(" ");
-//        sb.append(toStringRecursive(current.getNext()));
-//        return sb.toString();
-//    }
-//
-//    public int height() {
-//        return heightRecursive(root);
-//    }
-//
-//    private int heightRecursive(Node_DLL<T> node) {
-//        if (node == null) {
-//            return -1;
-//        }
-//        int leftHeight = heightRecursive(node.getPrev());
-//        int rightHeight = heightRecursive(node.getNext());
-//        return Math.max(leftHeight, rightHeight) + 1;
-//    }
-//
-//    public int size() {
-//        return count;
-//    }
-//
-//    public boolean isEmpty() {
-//        return count == 0;
-//    }
-//
-//    public void inOrderTraversal() {
-//        inOrderTraversalRecursive(root);
-//    }
-//
-//    private void inOrderTraversalRecursive(Node_DLL<T> node) {
-//        if (node != null) {
-//            inOrderTraversalRecursive(node.getPrev());
-//            System.out.print(node.getData() + " ");
-//            inOrderTraversalRecursive(node.getNext());
-//        }
-//    }
-//
-//    public void preOrderTraversal() {
-//        preOrderTraversalRecursive(root);
-//    }
-//
-//    private void preOrderTraversalRecursive(Node_DLL<T> node) {
-//        if (node != null) {
-//            System.out.print(node.getData() + " ");
-//            preOrderTraversalRecursive(node.getPrev());
-//            preOrderTraversalRecursive(node.getNext());
-//        }
-//    }
-//
-//    public void postOrderTraversal() {
-//        postOrderTraversalRecursive(root);
-//    }
-//
-//    private void postOrderTraversalRecursive(Node_DLL<T> node) {
-//        if (node != null) {
-//            postOrderTraversalRecursive(node.getPrev());
-//            postOrderTraversalRecursive(node.getNext());
-//            System.out.print(node.getData() + " ");
-//        }
-//    }
-//
-//    public void levelOrderTraversal() {
-//        if (root == null) {
-//            return;
-//        }
-//        Queue<Node_DLL<T>> queue = new LinkedList<>();
-//        queue.add(root);
-//        while (!queue.isEmpty()) {
-//            Node_DLL<T> current = queue.poll();
-//            System.out.print(current.getData() + " ");
-//            if (current.getPrev() != null) {
-//                queue.add(current.getPrev());
-//            }
-//            if (current.getNext() != null) {
-//                queue.add(current.getNext());
-//            }
-//        }
-//    }
+//return currentNode
+
 }

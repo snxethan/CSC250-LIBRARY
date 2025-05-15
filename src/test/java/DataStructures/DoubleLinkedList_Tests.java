@@ -4,7 +4,7 @@ import NEU.ET39.CSC250.DataStructures.DoubleLinkedList;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-public class DoubleLinkedList_Test {
+public class DoubleLinkedList_Tests {
 
     @Test
     public void testCount() {

@@ -1,5 +1,7 @@
 package NEU.ET39.CSC250.DataStructures;
 
+import NEU.ET39.CSC250.DataStructures.Nodes.Node_SLL;
+
 public class SingleLinkedList <T extends Comparable<T>> {
     private Node_SLL<T> head;
     private int count;

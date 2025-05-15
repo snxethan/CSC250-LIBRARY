@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 
-public class SingleLinkedList_Test {
+public class SingleLinkedList_Tests {
     // 2 test methods for each method in the DoubleLinkedList class
 
     @Test
