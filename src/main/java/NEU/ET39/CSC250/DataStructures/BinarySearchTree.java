@@ -20,48 +20,12 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     public int getHeight() {
-        if(root == null) {
-            return 0;
-        } else {
-            // Calculate the height of the tree
-            height = calculateHeight(root);
-            return height;
-        }
+        if (root == null) return 0;
+        return root.height();
     }
 
-    public void setHeight(int height) {
-        if(root == null) {
-            this.height = 0; // Set height to 0 if the tree is empty
-        } else {
-            this.height = calculateHeight(root);
-        }
-    }
 
-    /**
-     * Calculate the height of the tree recursively
-     * O(n)
-     * @param node the current node
-     * @return the height of the tree
-     */
-    private int calculateHeight(Node_BST<T> node) {
-        if(node == null) {
-            return -1; // Return -1 for null nodes
-        } else {
-            int leftHeight = calculateHeight(node.getLeft());
-            int rightHeight = calculateHeight(node.getRight());
-            return Math.max(leftHeight, rightHeight) + 1; // Return the maximum height of the two subtrees
-        }
-    }
-    // height psuedocode
-    // Function: height(node)
-    // Purpose: Calculates the height of the tree
-    // Input: node (the current node)
-    // Output: height of the tree
-    // if node is null:
-    // return -1
-    // leftHeight = height(node.left)
-    // rightHeight = height(node.right)
-    // return max(leftHeight, rightHeight) + 1
+
 
 
     public Node_BST<T> getRoot() {
@@ -93,11 +57,13 @@ public class BinarySearchTree<T extends Comparable<T>> {
      * O(n)
      * @return an array containing the elements of the tree
      */
-    public T[] toArray() {
-        T[] array = (T[]) Array.newInstance(root.getData().getClass(), count); // Create a type-safe array
-        toArrayRecursive(root, array, 0); // Fill the array recursively
-        return array; // Return the filled array
+    public T[] toArray(){
+        if (root == null) {
+            return (T[]) Array.newInstance(Object.class, 0); // Return an empty array if the tree is empty
+        }
+        return root.toArray();
     }
+
 
     // toArray psuedocode
     // Function: toArray(node, array, index)
@@ -132,13 +98,10 @@ public class BinarySearchTree<T extends Comparable<T>> {
      * @return a string representation of the tree
      */
     public String inOrder(){
-        StringBuilder sb = new StringBuilder();
-        inOrderRecursive(root, sb); // Start the in-order traversal
-        if (sb.length() >= 2) {
-            sb.setLength(sb.length() - 2); // Remove the trailing ", "
-        }
-        return sb.toString(); // Return the string representation
+        if (root == null) return "";
+        return root.inOrder().trim();
     }
+
 
     // inOrder psuedocode
     // Function: inOrder(node, sb)
@@ -152,31 +115,12 @@ public class BinarySearchTree<T extends Comparable<T>> {
     // return sb // Return the string builder
 
     /**
-     * Recursively traverse the tree in-order and append the elements to a string
-     * @param node the current node
-     * @param sb the string builder to append to
-     * @return the string builder
-     */
-    private StringBuilder inOrderRecursive(Node_BST<T> node, StringBuilder sb) {
-        if (node != null) {
-            inOrderRecursive(node.getLeft(), sb); // Traverse left subtree
-            sb.append(node.getData()).append(", "); // Append current node's data to the string
-            inOrderRecursive(node.getRight(), sb); // Traverse right subtree
-        }
-        return sb; // Return the string builder
-    }
-
-    /**
      * Convert the binary search tree to a string representation
      * @return a string representation of the tree
      */
     public String preOrder(){
-        StringBuilder sb = new StringBuilder();
-        preOrderRecursive(root, sb); // Start the pre-order traversal
-        if (sb.length() >= 2) {
-            sb.setLength(sb.length() - 2); // Remove the trailing ", "
-        }
-        return sb.toString(); // Return the string representation
+        if (root == null) return "";
+        return root.preOrder().trim();
     }
 
     // psuedo code for pre order
@@ -188,20 +132,6 @@ public class BinarySearchTree<T extends Comparable<T>> {
     // sb.append(node.data) // Append current node's data to the string
     // preOrder(node.left, sb) // Traverse left subtree
     // preOrder(node.right, sb) // Traverse right subtree
-    /**
-     * Recursively traverse the tree pre-order and append the elements to a string
-     * @param node the current node
-     * @param sb the string builder to append to
-     * @return the string builder
-     */
-    private StringBuilder preOrderRecursive(Node_BST<T> node, StringBuilder sb) {
-        if (node != null) {
-            sb.append(node.getData()).append(", "); // Append current node's data to the string
-            preOrderRecursive(node.getLeft(), sb); // Traverse left subtree
-            preOrderRecursive(node.getRight(), sb); // Traverse right subtree
-        }
-        return sb; // Return the string builder
-    }
 
 
 
@@ -218,29 +148,9 @@ public class BinarySearchTree<T extends Comparable<T>> {
      * Convert the binary search tree to a string representation
      * @return a string representation of the tree
      */
-    public String postOrder() {
-        StringBuilder sb = new StringBuilder();
-        postOrderRecursive(root, sb);
-        if (sb.length() >= 2) {
-            sb.setLength(sb.length() - 2);
-        }
-        return sb.toString();
-    }
-
-    /**
-     * Recursively traverse the tree post-order and append the elements to a string
-     * @param node the current node
-     * @param sb the string builder to append to
-     * @return the string builder
-     */
-
-    private StringBuilder postOrderRecursive(Node_BST<T> node, StringBuilder sb) {
-        if (node != null) {
-            postOrderRecursive(node.getLeft(), sb); // Traverse left subtree
-            postOrderRecursive(node.getRight(), sb); // Traverse right subtree
-            sb.append(node.getData()).append(", "); // Append current node's data to the string
-        }
-        return sb; // Return the string builder
+    public String postOrder(){
+        if (root == null) return "";
+        return root.postOrder().trim();
     }
 
 
@@ -250,36 +160,14 @@ public class BinarySearchTree<T extends Comparable<T>> {
      * @param value the value to be added
      */
     public void add(T value) {
-        Node_BST<T> newNode = new Node_BST<>(value); // Create a new node with the value
-        if (root == null) { // If the tree is empty
-            root = newNode; // Set root to the new node
+        if (root == null) {
+            root = new Node_BST<>(value);
         } else {
-            addRecursive(root, newNode); // Recursively add the new node
+            root.add(new Node_BST<>(value));
         }
-        count++; // Increment the count of nodes
+        count++;
     }
 
-    /**
-     * Recursively add a new node to the binary search tree
-     * O(log n) average, O(n) worst
-     * @param current the current node in the recursive loop, starting from the root
-     * @param newNode the new node to be added
-     */
-    private void addRecursive(Node_BST<T> current, Node_BST<T> newNode) {
-        if (newNode.getData().compareTo(current.getData()) < 0) { // Compare the new node's value with the current node's value
-            if (current.getLeft() == null) {
-                current.setLeft(newNode); // If the left child is null, set it to the new node
-            } else {
-                addRecursive(current.getLeft(), newNode); // Recursively add to the left subtree
-            }
-        } else {
-            if (current.getRight() == null) {
-                current.setRight(newNode); // If the right child is null, set it to the new node
-            } else {
-                addRecursive(current.getRight(), newNode); // Recursively add to the right subtree
-            }
-        }
-    }
 
     /**
      * Clear the nodes and reset the count
@@ -294,69 +182,12 @@ public class BinarySearchTree<T extends Comparable<T>> {
      * @param value the value you want to remove.
      */
     public void remove(T value) {
-        if(contains(value)){
-            root = removeRecursive(root, value); // O(log n)
+        if (root != null && root.contains(value)) {
+            root.remove(value);
+            count--;
         }
     }
 
-    /**
-     * recursively loop through and remove a specific value/node
-     * if the value exists, shift up nodes in the congruent order of the next possible node
-     * @param current the current node in the recursive loop, starting from the root
-     * @param value the value you want to remove.
-     * @return the current node checked, to be recursed until no children / only 1 child.
-     * O(log n)
-     */
-    private Node_BST<T> removeRecursive(Node_BST<T> current, T value) {
-
-        //best case
-        // if the current node is null, return null
-        if (current == null) {
-            return current;
-        }
-
-        // If the value to be deleted is less than the current node's data,
-        if (value.compareTo(current.getData()) < 0) {
-            // search in the left subtree
-            current.setLeft(removeRecursive(current.getLeft(), value)); // O(log n)
-        } else if (value.compareTo(current.getData()) > 0) { // If the value is greater,
-            // search in the right subtree
-            current.setRight(removeRecursive(current.getRight(), value)); // O(log n)
-        } else {
-            // three cases for current node
-
-            // Case 1: Node with no children (leaf node)
-            // Found the node to be deleted
-            // If the node has no children (leaf node)
-            if (current.getLeft() == null && current.getRight() == null) {
-                count--;
-                return null; // Remove the node
-            }
-
-            // Case 2: Node with one child
-            // If the node has one child
-            // check which child is null
-            if (current.getLeft() == null) {
-                count--;
-                return current.getRight();
-            } else if (current.getRight() == null) {
-                count--;
-                return current.getLeft();
-            }
-
-            // Case 3: Node with two children
-            // If the node has two children
-            // Find the inorder successor (smallest in the right subtree)
-            T temp = findMin(current.getRight());
-
-            // Copy the inorder successor's content to this node
-            current.setData(temp);
-
-            // Delete the inorder successor
-            current.setRight(removeRecursive(current.getRight(), temp)); // O(log n)
-        }
-        return current;
-    }
 
 
     /**
@@ -413,32 +244,10 @@ public class BinarySearchTree<T extends Comparable<T>> {
      * @return true if the value exists, false otherwise
      */
     public boolean contains(T value){
-        Node_BST<T> newNode = new Node_BST<>(value); // Create a new node with the value
-        if (root == null) { // If the tree is empty
-            return false;
-        }
-        return containsRecursive(root, newNode); // Recursively add the new node
+        if (root == null) return false;
+        return root.contains(value);
     }
 
-    /**
-     * Recursively check if a value exists in the binary search tree
-     * @param current the current node in the recursive loop, starting from the root
-     * @param newNode the new node to be checked
-     * @return true if the value exists, false otherwise
-     */
-    private boolean containsRecursive(Node_BST<T> current, Node_BST<T> newNode) {
-        if (current == null) {
-            return false; // Base case: value not found
-        }
-
-        if (newNode.getData().compareTo(current.getData()) < 0) {
-            return containsRecursive(current.getLeft(), newNode); // Search in the left subtree
-        } else if (newNode.getData().compareTo(current.getData()) > 0) {
-            return containsRecursive(current.getRight(), newNode); // Search in the right subtree
-        } else {
-            return true; // Value found
-        }
-    }
 
 
 }

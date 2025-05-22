@@ -1,6 +1,7 @@
 package DataStructures;
 
 import NEU.ET39.CSC250.DataStructures.BinarySearchTree;
+import NEU.ET39.CSC250.DataStructures.Nodes.Node_BST;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -157,6 +158,28 @@ public class BinarySearchTree_Tests {
         bst.add(17);
         assertEquals(2, bst.getHeight());
     }
+
+    @Test
+    void testGetHeight2(){
+        bst.add(10);
+        bst.add(5);
+        bst.add(15);
+        bst.add(3);
+        bst.add(7);
+        bst.add(13);
+        bst.add(17);
+        bst.add(18);
+        assertEquals(3, bst.getHeight());
+        bst.add(20);
+        assertEquals(4, bst.getHeight());
+        bst.add(25);
+        assertEquals(5, bst.getHeight());
+    }
+
+
+
+
+
 
 
 }
