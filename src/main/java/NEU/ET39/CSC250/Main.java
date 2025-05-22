@@ -19,19 +19,29 @@ public class Main {
     public static void dataStructures() {
         // Binary Search Tree
         BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        bst.add(10);
         bst.add(5);
+        bst.add(15);
         bst.add(3);
         bst.add(7);
-        bst.add(2);
-        bst.add(4);
-        bst.add(6);
-        bst.add(8);
+        bst.add(13);
+        bst.add(17);
+        bst.add(18);
         System.out.println("Binary Search Tree:");
-        System.out.println("In-order Traversal: " + bst.inOrderTraversal());
-        System.out.println("Pre-order Traversal: " + bst.preOrderTraversal());
-        System.out.println("Post-order Traversal: " + bst.postOrderTraversal());
-        System.out.println("Level-order Traversal: " + bst.levelOrderTraversal());
-        System.out.println("Contains 4: " + bst.contains(4));
+        System.out.println("Count: " + bst.getCount());
+        System.out.println("Contains 7: " + bst.contains(7));
+        System.out.println("Contains 20: " + bst.contains(20));
+        System.out.println("In-order Traversal: " + bst.inOrder());
+        System.out.println("Pre-order Traversal: " + bst.preOrder());
+        System.out.println("Post-order Traversal: " + bst.postOrder());
+        System.out.println("To Array: " + Arrays.toString(bst.toArray()));
+        System.out.println("Height: " + bst.getHeight());
+
+
+        // AVL Tree
+
+
+
     }
 
     public static void sorting(){

@@ -16,84 +16,147 @@ public class BinarySearchTree_Tests {
 
     @Test
     void testAddSingleNode() {
-        bst.Add(10);
+        bst.add(10);
         assertEquals(1, bst.getCount());
     }
 
     @Test
     void testAddMultipleNodes() {
-        bst.Add(10);
-        bst.Add(5);
-        bst.Add(15);
-        bst.Add(7);
+        bst.add(10);
+        bst.add(5);
+        bst.add(15);
+        bst.add(7);
         assertEquals(4, bst.getCount());
     }
 
     @Test
     void testRemoveLeafNode() {
-        bst.Add(10);
-        bst.Add(5);
-        bst.Add(15);
+        bst.add(10);
+        bst.add(5);
+        bst.add(15);
         bst.remove(5);
         assertEquals(2, bst.getCount());
     }
 
     @Test
     void testRemoveNodeWithOneChild() {
-        bst.Add(10);
-        bst.Add(5);
-        bst.Add(3);
+        bst.add(10);
+        bst.add(5);
+        bst.add(3);
         bst.remove(5);
         assertEquals(2, bst.getCount());
     }
 
     @Test
     void testRemoveNodeWithTwoChildren() {
-        bst.Add(10);
-        bst.Add(5);
-        bst.Add(15);
-        bst.Add(13);
-        bst.Add(17);
+        bst.add(10);
+        bst.add(5);
+        bst.add(15);
+        bst.add(13);
+        bst.add(17);
         bst.remove(15);
         assertEquals(4, bst.getCount());
     }
 
     @Test
     void testRemoveRoot() {
-        bst.Add(10);
-        bst.Add(5);
-        bst.Add(15);
+        bst.add(10);
+        bst.add(5);
+        bst.add(15);
         bst.remove(10);  // root has two children
         assertEquals(2, bst.getCount());
     }
 
     @Test
     void testRemoveNonExistentValue() {
-        bst.Add(10);
-        bst.Add(5);
-        bst.Add(15);
+        bst.add(10);
+        bst.add(5);
+        bst.add(15);
         bst.remove(99);  // should do nothing
         assertEquals(3, bst.getCount());
     }
 
     @Test
     void testClear() {
-        bst.Add(10);
-        bst.Add(5);
-        bst.Add(15);
+        bst.add(10);
+        bst.add(5);
+        bst.add(15);
         bst.clear();
         assertEquals(0, bst.getCount());
     }
 
     @Test
     void testRemoveAll() {
-        bst.Add(10);
-        bst.Add(5);
-        bst.Add(15);
+        bst.add(10);
+        bst.add(5);
+        bst.add(15);
         bst.remove(10);
         bst.remove(5);
         bst.remove(15);
         assertEquals(0, bst.getCount());
     }
+
+    @Test
+    void testContains() {
+        bst.add(10);
+        bst.add(5);
+        bst.add(15);
+        assertEquals(true, bst.contains(10));
+        assertEquals(false, bst.contains(20));
+    }
+
+    @Test
+    void testInOrder() {
+        bst.add(10);
+        bst.add(5);
+        bst.add(15);
+        assertEquals("5, 10, 15", bst.inOrder().toString());
+    }
+
+    @Test
+    void testPreOrder() {
+        bst.add(10);
+        bst.add(5);
+        bst.add(15);
+        assertEquals("10, 5, 15", bst.preOrder().toString());
+    }
+
+    @Test
+    void testPostOrder() {
+        bst.add(10);
+        bst.add(5);
+        bst.add(15);
+        assertEquals("5, 15, 10", bst.postOrder().toString());
+    }
+
+    @Test
+    void testToArray() {
+        bst.add(10);
+        bst.add(5);
+        bst.add(15);
+        Integer[] expected = {5, 10, 15};
+        assertEquals(expected, bst.toArray());
+    }
+
+    @Test
+    void testGetHeight() {
+        bst.add(10);
+        bst.add(5);
+        bst.add(15);
+        assertEquals(1, bst.getHeight());
+
+        bst.add(3);
+        assertEquals(2, bst.getHeight());
+
+        bst.add(7);
+        assertEquals(2, bst.getHeight());
+
+        bst.add(13);
+        assertEquals(2, bst.getHeight());
+
+        bst.add(17);
+        assertEquals(2, bst.getHeight());
+    }
+
 
 }
