@@ -1,14 +1,16 @@
 package NEU.ET39.CSC250.DataStructures.Nodes;
 
 public class Node_BST<T extends Comparable<T>> {
-    private final T data;
+    private T data;
     private Node_BST<T> left;
     private Node_BST<T> right;
+    private int height;
 
     public Node_BST(T data) {
         this.data = data;
         this.left = null;
         this.right = null;
+        this.height = 0; // Height of a new node is 0
     }
 
     public T getData() {
@@ -23,6 +25,14 @@ public class Node_BST<T extends Comparable<T>> {
 
     public Node_BST<T> getRight() {
         return right;
+    }
+
+    public void setLeft(Node_BST<T> left) {
+        this.left = left;
+    }
+
+    public void setRight(Node_BST<T> right) {
+        this.right = right;
     }
 
 
@@ -52,24 +62,34 @@ public class Node_BST<T extends Comparable<T>> {
      * @param value The value to remove.
      * O(log n) average, O(n) worst
      */
-    public void remove(T value) {
+    public Node_BST<T> remove(T value) {
         if (value.compareTo(this.data) < 0) {
             if (this.left != null) {
-                if (this.left.getData().compareTo(value) == 0) {
-                    this.left = null; // Remove the left child
-                } else {
-                    this.left.remove(value);
-                }
+                this.left = this.left.remove(value);
             }
         } else if (value.compareTo(this.data) > 0) {
             if (this.right != null) {
-                if (this.right.getData().compareTo(value) == 0) {
-                    this.right = null; // Remove the right child
-                } else {
-                    this.right.remove(value);
+                this.right = this.right.remove(value);
+            }
+        } else {
+            // Node to remove found
+            if (this.left == null) {
+                return this.right;
+            } else if (this.right == null) {
+                return this.left;
+            } else {
+                // Node with two children: get the in-order successor
+                Node_BST<T> successor = this.right;
+                while (successor.left != null) {
+                    successor = successor.left;
                 }
+                // Copy successor's data to this node
+                this.data = successor.data;
+                // Remove successor node
+                this.right = this.right.remove(successor.data);
             }
         }
+        return this;
     }
 
     /**
@@ -95,7 +115,8 @@ public class Node_BST<T extends Comparable<T>> {
     public int height() {
         int leftHeight = (left != null) ? left.height() : -1;
         int rightHeight = (right != null) ? right.height() : -1;
-        return Math.max(leftHeight, rightHeight) + 1;
+        this.height = Math.max(leftHeight, rightHeight) + 1;
+        return this.height;
     }
 
     /**

@@ -2,8 +2,13 @@ package NEU.ET39.CSC250.DataStructures;
 
 import NEU.ET39.CSC250.DataStructures.Nodes.Node_BST;
 
-import java.lang.reflect.Array;
-
+/**
+ * Binary Search Tree (BST) implementation
+ * This class provides methods to add, remove, and search for elements in the tree,
+ * as well as methods to convert the tree to an array and string representation.
+ *
+ * @param <T> the type of elements in the tree, must be comparable
+ */
 public class BinarySearchTree<T extends Comparable<T>> {
     private Node_BST<T> root;
     private int count;
@@ -21,7 +26,8 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     public int getHeight() {
         if (root == null) return 0;
-        return root.height();
+        this.height = root.height();
+        return height; // Return the height of the tree
     }
 
 
@@ -51,15 +57,26 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return count;
     }
 
+    public void setCount(int count) {
+        if(count < 0) {
+            throw new IllegalArgumentException("Count cannot be negative");
+        }
+        if(count == 0) {
+            root = null; // If count is 0, set root to null
+        }
+        this.count = count;
+    }
+
 
     /**
      * Convert the binary search tree to an array
      * O(n)
      * @return an array containing the elements of the tree
      */
-    public T[] toArray(){
+    public T[] toArray() {
         if (root == null) {
-            return (T[]) Array.newInstance(Object.class, 0); // Return an empty array if the tree is empty
+            // Use Object[].class and cast, or store the class of T elsewhere
+            return (T[]) java.lang.reflect.Array.newInstance(Comparable.class, 0);
         }
         return root.toArray();
     }

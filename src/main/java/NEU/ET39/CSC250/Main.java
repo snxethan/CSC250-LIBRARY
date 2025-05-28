@@ -3,6 +3,7 @@ package NEU.ET39.CSC250;
 import NEU.ET39.CSC250.Algorithms.CodeWars;
 import NEU.ET39.CSC250.Algorithms.Isomorphs;
 import NEU.ET39.CSC250.Algorithms.Recursive;
+import NEU.ET39.CSC250.DataStructures.AVLTree;
 import NEU.ET39.CSC250.DataStructures.BinarySearchTree;
 
 import java.util.Arrays;
@@ -18,29 +19,51 @@ public class Main {
 
     public static void dataStructures() {
         // Binary Search Tree
-        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
-        bst.add(10);
-        bst.add(5);
-        bst.add(15);
-        bst.add(3);
-        bst.add(7);
-        bst.add(13);
-        bst.add(17);
-        bst.add(18);
-        System.out.println("Binary Search Tree:");
-        System.out.println("Count: " + bst.getCount());
-        System.out.println("Contains 7: " + bst.contains(7));
-        System.out.println("Contains 20: " + bst.contains(20));
-        System.out.println("In-order Traversal: " + bst.inOrder());
-        System.out.println("Pre-order Traversal: " + bst.preOrder());
-        System.out.println("Post-order Traversal: " + bst.postOrder());
-        System.out.println("To Array: " + Arrays.toString(bst.toArray()));
-        System.out.println("Height: " + bst.getHeight());
-
+//        AVLTree<Integer> bst = new AVLTree<>();
+//        bst.add(10);
+//        bst.add(5);
+//        bst.add(15);
+//        bst.add(3);
+//        bst.add(7);
+//        bst.add(13);
+//        bst.add(17);
+//        bst.add(18);
+//        System.out.println("Binary Search Tree:");
+//        System.out.println("Count: " + bst.getCount());
+//        System.out.println("Contains 7: " + bst.contains(7));
+//        System.out.println("Contains 20: " + bst.contains(20));
+//        System.out.println("To Array: " + Arrays.toString(bst.toArray()));
+//        bst.remove(7);
+//        System.out.println("After removing 7:");
+//        System.out.println("Count: " + bst.getCount());
+//        System.out.println("Contains 7: " + bst.contains(7));
+//
+//        System.out.println("In-order Traversal: " + bst.inOrder());
+//        System.out.println("Pre-order Traversal: " + bst.preOrder());
+//        System.out.println("Post-order Traversal: " + bst.postOrder());
+//        System.out.println("To Array: " + Arrays.toString(bst.toArray()));
+//        System.out.println("Height: " + bst.getHeight());
 
         // AVL Tree
+        AVLTree<Integer> avl = new AVLTree<>();
 
+        avl.add(1);
+        avl.add(2);
+        avl.add(4);
+        avl.add(3);
 
+        System.out.println("Binary Search Tree:");
+        System.out.println("To Array: " + Arrays.toString(avl.toArray()));
+        System.out.println("Count: " + avl.getCount());
+        System.out.println("Height: " + avl.getHeight());
+        System.out.println("Contains 3: " + avl.contains(3));
+        System.out.println("Contains 5: " + avl.contains(5));
+        avl.remove(3);
+        System.out.println("After removing 3:");
+        System.out.println("To Array: " + Arrays.toString(avl.toArray()));
+        System.out.println("Count: " + avl.getCount());
+        System.out.println("Height: " + avl.getHeight());
+        System.out.println("Contains 3: " + avl.contains(3));
 
     }
 

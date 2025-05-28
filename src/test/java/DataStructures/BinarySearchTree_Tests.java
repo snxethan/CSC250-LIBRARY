@@ -176,7 +176,15 @@ public class BinarySearchTree_Tests {
         assertEquals(5, bst.getHeight());
     }
 
-
+//    @Test
+//    void testEmptyTree() {
+//        assertEquals(0, bst.getCount());
+//        assertEquals(0, bst.getHeight());
+//        assertEquals("[]", bst.toArray().toString());
+//        assertEquals("[]", bst.inOrder().toString());
+//        assertEquals("[]", bst.preOrder().toString());
+//        assertEquals("[]", bst.postOrder().toString());
+//    }
 
 
 
