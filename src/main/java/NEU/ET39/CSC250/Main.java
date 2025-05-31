@@ -1,50 +1,72 @@
 package NEU.ET39.CSC250;
 
-import NEU.ET39.CSC250.Algorithms.CodeWars;
-import NEU.ET39.CSC250.Algorithms.Isomorphs;
-import NEU.ET39.CSC250.Algorithms.Recursive;
-import NEU.ET39.CSC250.DataStructures.AVLTree;
-import NEU.ET39.CSC250.DataStructures.BinarySearchTree;
+import NEU.ET39.CSC250.Algorithm.Isomorphs;
+import NEU.ET39.CSC250.Algorithm.MazeSolver;
+import NEU.ET39.CSC250.Algorithm.Recursive;
+import NEU.ET39.CSC250.Algorithm.Sorter;
+import NEU.ET39.CSC250.DataStructure.Graph.Graph;
+import NEU.ET39.CSC250.DataStructure.Tree.AVLTree;
 
 import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 //        sorting();
 //        codeWars();
 //        recursive();
 //        isomorphs();
-        dataStructures();
+//        dataStructures();
+        graphs();
+    }
+
+
+    public static void graphs() throws Exception {
+        MazeSolver mazeSolver = new MazeSolver();
+        //"AX1,AX4:3,AX2:3,AX3:6"
+        //"AX2,AX1:3,AX3:3,AX4:6",
+        //"AX3,AX2:3,AX1:6,AX4:4",
+        //"AX4,AX1:3,AX2:6,AX3:4,AX5:15",
+        //"AX5,AX4:15"
+        String[] adjacencyList = {
+                "AX1,AX2,AX3,AX4,AX5",
+                "AX1,AX4:3,AX2:3,AX3:6",
+                "AX2,AX1:3,AX3:3,AX4:6",
+                "AX3,AX2:3,AX1:6,AX4:4",
+                "AX4,AX1:3,AX2:6,AX3:4,AX5:15",
+                "AX5,AX4:15"
+        };
+        Graph graph = new Graph(adjacencyList);
+        mazeSolver.solveMaze(graph, "AX1", "AX5");
     }
 
     public static void dataStructures() {
-        // Binary Search Tree
-//        AVLTree<Integer> bst = new AVLTree<>();
-//        bst.add(10);
-//        bst.add(5);
-//        bst.add(15);
-//        bst.add(3);
-//        bst.add(7);
-//        bst.add(13);
-//        bst.add(17);
-//        bst.add(18);
-//        System.out.println("Binary Search Tree:");
-//        System.out.println("Count: " + bst.getCount());
-//        System.out.println("Contains 7: " + bst.contains(7));
-//        System.out.println("Contains 20: " + bst.contains(20));
-//        System.out.println("To Array: " + Arrays.toString(bst.toArray()));
-//        bst.remove(7);
-//        System.out.println("After removing 7:");
-//        System.out.println("Count: " + bst.getCount());
-//        System.out.println("Contains 7: " + bst.contains(7));
-//
-//        System.out.println("In-order Traversal: " + bst.inOrder());
-//        System.out.println("Pre-order Traversal: " + bst.preOrder());
-//        System.out.println("Post-order Traversal: " + bst.postOrder());
-//        System.out.println("To Array: " + Arrays.toString(bst.toArray()));
-//        System.out.println("Height: " + bst.getHeight());
+//         Binary Search Tree
+        AVLTree<Integer> bst = new AVLTree<>();
+        bst.add(10);
+        bst.add(5);
+        bst.add(15);
+        bst.add(3);
+        bst.add(7);
+        bst.add(13);
+        bst.add(17);
+        bst.add(18);
+        System.out.println("Binary Search Tree:");
+        System.out.println("Count: " + bst.getCount());
+        System.out.println("Contains 7: " + bst.contains(7));
+        System.out.println("Contains 20: " + bst.contains(20));
+        System.out.println("To Array: " + Arrays.toString(bst.toArray()));
+        bst.remove(7);
+        System.out.println("After removing 7:");
+        System.out.println("Count: " + bst.getCount());
+        System.out.println("Contains 7: " + bst.contains(7));
 
-        // AVL Tree
+        System.out.println("In-order Traversal: " + bst.inOrder());
+        System.out.println("Pre-order Traversal: " + bst.preOrder());
+        System.out.println("Post-order Traversal: " + bst.postOrder());
+        System.out.println("To Array: " + Arrays.toString(bst.toArray()));
+        System.out.println("Height: " + bst.getHeight());
+
+//         AVL Tree
         AVLTree<Integer> avl = new AVLTree<>();
 
         avl.add(1);
@@ -70,14 +92,13 @@ public class Main {
     public static void sorting(){
 //        Integer[] arr = {5, 2, 9, 1, 5, 6};
         Integer[] arr = {2,3,6,1,2,9,7,6,4,4,2,9,10,11,5,3,12};
-//        System.out.println(Arrays.toString(arr));
-//        System.out.println(Arrays.toString(Sorter.bubbleSort(arr)));
-//        System.out.println(Arrays.toString(Sorter.insertionSort(arr)));
-//        System.out.println(Arrays.toString(Sorter.insertionSort2(arr)));
-//        System.out.println(Arrays.toString(Sorter.selectionSort(arr)));
-//        System.out.println(Arrays.toString(Sorter.mergeSort(arr)));
-//        System.out.println(Arrays.toString(Sorter.mergeSort(arr,0,arr.length-1)));
-//        System.out.println(Arrays.toString(Sorter.quickSort(arr,0,arr.length-1)));
+        System.out.println(Arrays.toString(arr));
+        System.out.println(Arrays.toString(Sorter.bubbleSort(arr)));
+        System.out.println(Arrays.toString(Sorter.insertionSort(arr)));
+        System.out.println(Arrays.toString(Sorter.insertionSort2(arr)));
+        System.out.println(Arrays.toString(Sorter.selectionSort(arr)));
+        System.out.println(Arrays.toString(Sorter.mergeSort(arr)));
+        System.out.println(Arrays.toString(Sorter.quickSort(arr,0,arr.length-1)));
     }
 
     public static void codeWars(){
