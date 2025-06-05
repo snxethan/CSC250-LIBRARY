@@ -49,9 +49,7 @@ public class MazeSolver_Tests {
         };
         Graph graph = new Graph(adjacencyList);
         MazeSolver solver = new MazeSolver();
-        org.junit.jupiter.api.Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            solver.solveMaze(graph, "AX0", "AX5");
-        });
+        org.junit.jupiter.api.Assertions.assertThrows(IllegalArgumentException.class, () -> solver.solveMaze(graph, "AX0", "AX5"));
     }
 
     @org.junit.jupiter.api.Test

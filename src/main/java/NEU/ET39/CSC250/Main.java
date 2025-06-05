@@ -1,10 +1,8 @@
 package NEU.ET39.CSC250;
 
-import NEU.ET39.CSC250.Algorithm.Isomorphs;
-import NEU.ET39.CSC250.Algorithm.MazeSolver;
-import NEU.ET39.CSC250.Algorithm.Recursive;
-import NEU.ET39.CSC250.Algorithm.Sorter;
+import NEU.ET39.CSC250.Algorithm.*;
 import NEU.ET39.CSC250.DataStructure.Graph.Graph;
+import NEU.ET39.CSC250.DataStructure.Graph.Vertex;
 import NEU.ET39.CSC250.DataStructure.Tree.AVLTree;
 
 import java.util.Arrays;
@@ -22,6 +20,7 @@ public class Main {
 
     public static void graphs() throws Exception {
         MazeSolver mazeSolver = new MazeSolver();
+        NetworkArchitect prims = new NetworkArchitect();
         //"AX1,AX4:3,AX2:3,AX3:6"
         //"AX2,AX1:3,AX3:3,AX4:6",
         //"AX3,AX2:3,AX1:6,AX4:4",
@@ -36,7 +35,13 @@ public class Main {
                 "AX5,AX4:15"
         };
         Graph graph = new Graph(adjacencyList);
-        mazeSolver.solveMaze(graph, "AX1", "AX5");
+//        mazeSolver.solveMaze(graph, "AX1", "AX5");
+        Graph solvedGraph = prims.primsAlgorithm(graph);
+        System.out.println("Minimum Spanning Tree:\n" + solvedGraph);
+        Vertex startVertex = solvedGraph.findVertexByData("AX1");
+        Vertex endVertex = solvedGraph.findVertexByData("AX5");
+        System.out.println("Total Length: " + prims.calculateTotalCableLength(solvedGraph, startVertex, endVertex));
+        System.out.println("Path Length from AX1 to AX5: " + prims.calculatePathCableLength(solvedGraph, startVertex, endVertex));
     }
 
     public static void dataStructures() {

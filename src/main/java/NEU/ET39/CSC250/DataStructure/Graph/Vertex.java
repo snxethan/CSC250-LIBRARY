@@ -12,6 +12,7 @@ public class Vertex {
     private final String value; // The value of the vertex, must not be null or empty
     private List<Edge> edges = new ArrayList<>(); // The edges connected to this vertex, must not be null or contain null values
 
+
     /**
      * Constructs a Vertex with the specified value.
      *
@@ -24,6 +25,8 @@ public class Vertex {
         }
         this.value = value;
     }
+
+
     public String getValue() {
         return value;
     }
@@ -48,5 +51,19 @@ public class Vertex {
             }
         }
         this.edges = new ArrayList<>(edges);
+    }
+
+    public void removeAllEdges() {
+        this.edges.clear();
+    }
+
+    public void addEdge(Edge edge) {
+        if (edge == null) {
+            throw new IllegalArgumentException("Edge cannot be null");
+        }
+        if (edge.getSource() != this && edge.getDestination() != this) {
+            throw new IllegalArgumentException("Edge must connect to this vertex");
+        }
+        edges.add(edge);
     }
 }

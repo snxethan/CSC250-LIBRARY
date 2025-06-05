@@ -1,7 +1,9 @@
 package NEU.ET39.CSC250.DataStructure.Graph;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Represents a graph using an adjacency list.
@@ -9,7 +11,7 @@ import java.util.List;
  * and subsequent lines contain edges with weights.
  */
 public class Graph {
-    public List<Vertex> vertices = new ArrayList<>();
+    private List<Vertex> vertices = new ArrayList<>();
 
     /**
      * Constructs a Graph from an adjacency list.
@@ -59,6 +61,36 @@ public class Graph {
             }
         }
     }
+
+
+    // overloaded constructor to create an empty graph
+    public Graph() {
+        // This constructor creates an empty graph with no vertices or edges
+    }
+
+
+    // add to the graph
+    public void addVertex(Vertex vertex) {
+        if (vertex == null) {
+            throw new IllegalArgumentException("Vertex cannot be null");
+        }
+//        List<Edge> edges = vertices.get(vertices.size() - 1).getEdges();
+//        if(edges.size() == 1){
+//            edges.get(0).setDestination(vertex);
+//        }
+        vertices.add(vertex);
+    }
+
+    public void addEdgeToVertex(Vertex vertex, Edge edge) {
+        if (vertex == null || edge == null) {
+            throw new IllegalArgumentException("Vertex and Edge cannot be null");
+        }
+        if (!vertices.contains(vertex)) {
+            throw new IllegalArgumentException("Vertex not found in the graph");
+        }
+        vertex.getEdges().add(edge);
+    }
+
     /**
      * Finds a vertex in the vertex collection and returns it
      * @param value vertex to be returned
@@ -81,6 +113,33 @@ public class Graph {
         this.vertices = vertices;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        Set<String> seenEdges = new HashSet<>();
+
+        for (Vertex vertex : vertices) {
+            for (Edge edge : vertex.getEdges()) {
+                String from = vertex.getValue();
+                String to = edge.getDestination().getValue();
+
+                // Skip self-loops
+                if (from.equals(to)) {
+                    continue;
+                }
+
+                // Canonical representation of an undirected edge
+                String edgeKey = from.compareTo(to) < 0 ? from + "-" + to : to + "-" + from;
+
+                if (!seenEdges.contains(edgeKey)) {
+                    sb.append(from).append(" -(").append(edge.getWeight()).append(")> ").append(to).append("\n");
+                    seenEdges.add(edgeKey);
+                }
+            }
+        }
+
+        return sb.toString();
+    }
 
 
 }

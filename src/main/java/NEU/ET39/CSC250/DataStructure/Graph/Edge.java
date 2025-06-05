@@ -2,8 +2,8 @@ package NEU.ET39.CSC250.DataStructure.Graph;
 
 public class Edge {
     private final int weight;
-    private final Vertex source;
-    private final Vertex destination;
+    private Vertex source;
+    private Vertex destination;
 
 
     public Edge(int weight, Vertex source, Vertex destination) {
@@ -26,5 +26,19 @@ public class Edge {
     }
     public Vertex getDestination() {
         return destination;
+    }
+
+    public void setSource(Vertex source) {
+        if (source == null) {
+            throw new IllegalArgumentException("Source vertex cannot be null");
+        }
+        this.source = source;
+    }
+
+    public void setDestination(Vertex destination) {
+        if (destination == null) {
+            throw new IllegalArgumentException("Destination vertex cannot be null");
+        }
+        this.destination = destination;
     }
 }
