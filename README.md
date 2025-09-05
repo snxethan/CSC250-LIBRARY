@@ -2,7 +2,7 @@
 
 A comprehensive Java library implementing various data structures and algorithms for Computer Science 250 coursework. This project demonstrates fundamental computer science concepts including sorting algorithms, graph algorithms, tree data structures, and algorithmic problem solving.
 
-## 🚀 Features
+## Features
 
 ### Data Structures
 - **Trees**: AVL Trees with self-balancing capabilities
@@ -20,12 +20,12 @@ A comprehensive Java library implementing various data structures and algorithms
 - **Backtracking**: N-Queens problem solver
 - **Problem Solving**: CodeWars challenges and recursive solutions
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Java 17 or higher
 - Maven 3.6 or higher
 
-## 🛠️ Build and Run
+## Build and Run
 
 ### Clone the repository
 ```bash
@@ -48,7 +48,7 @@ mvn exec:java -Dexec.mainClass="NEU.ET39.CSC250.Main"
 mvn test
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 src/main/java/NEU/ET39/CSC250/
@@ -68,7 +68,7 @@ src/main/java/NEU/ET39/CSC250/
 └── Main.java                  # Main application entry point
 ```
 
-## 🔧 Usage Examples
+## Usage Examples
 
 ### Sorting Algorithms
 ```java
@@ -97,7 +97,7 @@ tree.add(15);
 System.out.println("Tree height: " + tree.getHeight());
 ```
 
-## 🧪 Testing
+## Testing
 
 The project includes comprehensive JUnit tests for all algorithms and data structures:
 
@@ -110,7 +110,7 @@ mvn test -Dtest=PrimsTests
 mvn test -Dtest=AVLTreeTest
 ```
 
-## 📚 Algorithms Implemented
+## Algorithms Implemented
 
 ### Sorting
 - **Bubble Sort**: O(n²) comparison-based sorting
@@ -128,7 +128,7 @@ mvn test -Dtest=AVLTreeTest
 - **Binary Search**: O(log n) recursive search
 - **Isomorph Detection**: Pattern matching for strings
 
-## 🎯 Learning Objectives
+## Learning Objectives
 
 This library demonstrates key computer science concepts:
 
@@ -139,10 +139,6 @@ This library demonstrates key computer science concepts:
 5. **Recursive Thinking**: Breaking down complex problems
 6. **Testing**: Comprehensive unit test coverage
 
-## 🤝 Contributing
+## Author(s)
 
-This is a coursework project for CSC250. Feel free to explore the implementations and suggest improvements.
-
-## 📄 License
-
-This project is created for educational purposes as part of CSC250 coursework.
+- [**Ethan Townsend (snxethan)**](www.ethantownsend.dev)
